@@ -4,7 +4,8 @@ Feature: TransferMate Sign up functionality
 
   Background: For the scenarios in the feature file, user is expected to be on Sign up page
     Given user is on the TransferMate Sign up page
-@positive @wip
+
+@positive
   Scenario: Sign up functionality with valid credentials in Education account verification
     When user clicks "Education" radio button
     And user selects Ireland on Country registration
@@ -20,7 +21,7 @@ Feature: TransferMate Sign up functionality
     Then user lands on email and mobile number verification page
 
 
-  @positive
+  @positive @wip
   Scenario Outline: Sign up functionality with valid credentials in Individual account verification
     When user clicks "Individual" radio button
     And user selects Ireland on Nationality registration
