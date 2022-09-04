@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class SignUpPage extends BasePage {
+public class SignUpPage {
     public SignUpPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
@@ -21,7 +21,6 @@ public class SignUpPage extends BasePage {
         if (buttonName.startsWith("I")) {
             buttonName = "individual";
         }
-
         buttonName = buttonName.toLowerCase();
         WebElement radioButton = Driver.getDriver().findElement(By.xpath("(//label[@for='account_type_" + buttonName + "'])[2]"));
         return radioButton;
@@ -60,11 +59,25 @@ public class SignUpPage extends BasePage {
     @FindBy(xpath = "(//div/label[@for='terms_of_use_agree'])[1]")
     public WebElement termsOfUse;
 
-    @FindBy(xpath = "(//label[@for='newsletter_and_privacy_policy_agree'])[2]")
+    @FindBy(id = "register_terms_of_use_agree_label_cell")
     public WebElement newsAndOffers;
+
+    @FindBy(id="cal_captcha_f10_question")
+    public WebElement captchaQuestion;
+
+    @FindBy(xpath = "//div/input[@name='__calc_captcha_text']")
+    public WebElement captchaResult;
 
     @FindBy(name = "button_subscribe")
     public WebElement openMyFreeAccount;
+
+    @FindBy (className = "logo")
+    public WebElement transferMateButton;
+
+    @FindBy(id = "menu_485_115_28617")
+    public WebElement signUpButton;
+
+
 
 
 }

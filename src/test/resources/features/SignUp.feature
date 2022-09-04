@@ -17,8 +17,8 @@ Feature: TransferMate Sign up functionality
     And user clicks Terms of Use and Privacy Policy checkbox
     And user clicks hear about news and offers checkbox
     And user enters the captcha result
-    And user clicks open my free account submit button
-    Then user lands on email and mobile number verification page
+    #And user clicks open my free account submit button
+    #Then user lands on email and mobile number verification page
 
 
   @positive @wip
@@ -31,7 +31,6 @@ Feature: TransferMate Sign up functionality
     And user selects Ireland on Mobile Phone registration
     And user clicks Mobile Phone and enters "12345678"
     And user clicks Terms of Use and Privacy Policy checkbox
-    And user does not click hear about news and offers checkbox
     And user enters the captcha result
     And user clicks open my free account submit button
     Then user lands on email and mobile number verification page
@@ -69,7 +68,6 @@ Feature: TransferMate Sign up functionality
     And user selects Ireland on Mobile Phone registration
     And user clicks Mobile Phone and enters "12345678"
     And user clicks Terms of Use and Privacy Policy checkbox
-    And user does not click hear about news and offers checkbox
     And user enters the captcha result
     And user clicks open my free account submit button
     Then user lands on email and mobile number verification page
@@ -182,7 +180,6 @@ Feature: TransferMate Sign up functionality
     And user clicks Email address and enters "<email>"
     And user selects Ireland on Mobile Phone registration
     And user clicks Mobile Phone and enters "12345678"
-    And user does not click Terms of Use and Privacy Policy checkbox
     And user clicks hear about news and offers checkbox
     And user enters the captcha result
     And user clicks open my free account submit button
@@ -193,18 +190,13 @@ Feature: TransferMate Sign up functionality
       | Alex      | White    | alexwhite@happy.com |
 
   @negative
-  Scenario Outline: After Sign up credentials are entered when user clicks refresh button, user sees warning
+  Scenario Outline: After some Sign up credentials are entered when user clicks refresh button, user sees warning
   message verification
     When user clicks "Sole Trader" radio button
     And user selects Ireland on Country of incorporation registration
     And user clicks First Name and enters "<firstname>"
     And user clicks Last Name and enters "<lastname>"
     And user clicks Email address and enters "<email>"
-    And user selects Ireland on Mobile Phone registration
-    And user clicks Mobile Phone and enters "12345678"
-    And user clicks Terms of Use and Privacy Policy checkbox
-    And user clicks hear about news and offers checkbox
-    And user enters the captcha result
     And user clicks refresh button
     Then user sees a javascript alert
 
@@ -213,18 +205,14 @@ Feature: TransferMate Sign up functionality
       | Alex      | White    | alexwhite@happy.com |
 
   @negative
-  Scenario Outline: After Sign up credentials are entered when user clicks close button, user sees warning
+  Scenario Outline: After some Sign up credentials are entered when user clicks close button, user sees warning
   message verification
-    When user clicks "Sole Trader" radio button
+    When user clicks "Education" radio button
     And user selects Ireland on Country of incorporation registration
     And user clicks First Name and enters "<firstname>"
     And user clicks Last Name and enters "<lastname>"
     And user clicks Email address and enters "<email>"
-    And user selects Ireland on Mobile Phone registration
-    And user clicks Mobile Phone and enters "12345678"
-    And user clicks Terms of Use and Privacy Policy checkbox
-    And user clicks hear about news and offers checkbox
-    And user enters the captcha result
+
     And user clicks close button
     Then user sees a javascript alert
 
