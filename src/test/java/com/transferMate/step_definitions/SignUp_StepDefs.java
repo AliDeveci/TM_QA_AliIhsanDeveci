@@ -37,9 +37,7 @@ public class SignUp_StepDefs {
 
     @And("user selects Ireland on Country registration")
     public void userSelectsIrelandOnCountryRegistration() {
-        Select country = new Select(signUpPage.countryDrop);
-        signUpPage.countryDrop.click();
-        country.selectByValue("113");
+        signUpPage.chooseCountry(signUpPage.countryDrop, "Ireland");
     }
 
 
@@ -104,10 +102,10 @@ public class SignUp_StepDefs {
     }
 
 
-    @Then("user lands on email and mobile number verification page")
+ /*   @Then("user lands on email and mobile number verification page")
     public void userLandsOnEmailAndMobileNumberVerificationPage() {
 
-    }
+    }*/
 
 
     @And("user selects Ireland on Nationality registration")
@@ -119,14 +117,12 @@ public class SignUp_StepDefs {
     @And("user does not click hear about news and offers checkbox")
     public void userDoesNotClickHearAboutNewsAndOffersCheckbox() {
         System.err.println("Bu kodun çıkarılması lazım!");
-
     }
 
 
     @And("user selects Ireland on Country of incorporation registration")
     public void userSelectsIrelandOnCountryOfIncorporationRegistration() {
         signUpPage.chooseCountry(signUpPage.countryDrop, "Ireland");
-
     }
 
 
@@ -142,6 +138,7 @@ public class SignUp_StepDefs {
 
     }
 
+    @Ignore
     @Then("user sees red lined check box and can not move forward")
     public void userSeesRedLinedCheckBoxAndCanNotMoveForward() {
         Actions actions = new Actions(Driver.getDriver());
@@ -155,7 +152,7 @@ public class SignUp_StepDefs {
 
     }
 
-    @Then("user sees a javascript alert")
+   /* @Then("user sees a javascript alert")
     public void userSeesAJavascriptAlert() {
 
     }
@@ -163,7 +160,7 @@ public class SignUp_StepDefs {
     @And("user clicks close button")
     public void userClicksCloseButton() {
 
-    }
+    }*/
 
     @When("user clicks on TransferMate button")
     public void userClicksOnTransferMateButton() {
