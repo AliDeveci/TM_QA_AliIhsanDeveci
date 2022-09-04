@@ -1,5 +1,6 @@
 package com.transferMate.step_definitions;
 
+import com.transferMate.pages.CookiesPage;
 import com.transferMate.pages.SignUpPage;
 import com.transferMate.utilities.BrowserUtilities;
 import com.transferMate.utilities.ConfigurationReader;
@@ -21,6 +22,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class SignUp_StepDefs {
 
     SignUpPage signUpPage = new SignUpPage();
+    CookiesPage cookiesPage= new CookiesPage();
 
     @Given("user is on the TransferMate Sign up page")
     public void userIsOnTheTransferMateSignUpPage() {
@@ -31,7 +33,6 @@ public class SignUp_StepDefs {
     @When("user clicks {string} radio button")
     public void userClicksRadioButton(String accountType) {
         signUpPage.radioButton(accountType).click();
-
     }
 
 
@@ -44,9 +45,7 @@ public class SignUp_StepDefs {
     @And("user clicks First Name and enters {string}")
     public void userClicksFirstNameAndEnters(String arg0) {
         signUpPage.firstName.sendKeys("Jack");
-
     }
-
 
     @And("user clicks Last Name and enters {string}")
     public void userClicksLastNameAndEnters(String arg0) {
@@ -72,46 +71,59 @@ public class SignUp_StepDefs {
 
     @And("user clicks Mobile Phone and enters {string}")
     public void userClicksMobilePhoneAndEnters(String arg0) {
-       // WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
-        //wait.until(ExpectedConditions.elementToBeClickable(signUpPage.termsOfUse));
-        signUpPage.mobilePhone.sendKeys("12345678");
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+        wait.until(ExpectedConditions.elementToBeClickable(signUpPage.mobilePhone));
+        signUpPage.mobilePhone.sendKeys("12345678", Keys.TAB);
     }
 
+    /**
+     * cookies url = https://www.transfermate.com/terms/
+     * cookies title = Terms & Conditions - TransferMate Global Payments - Google Chrome
+     * xpath= "//div/a[@id='CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll']"
+     */
+    @And("user accepts all cookies")
+    public void userAcceptsAllCookies() {
+        BrowserUtilities.switchToWindow("Terms & Conditions - TransferMate Global Payments - Google Chrome");
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+        wait.until(ExpectedConditions.elementToBeClickable(cookiesPage.acceptCookies));
+        /*cookiesPage.acceptCookies.click();
+        //Driver.getDriver().quit();
+        BrowserUtilities.switchToWindow("Sign up for your free TransferMate account");*/
+
+
+    }
+
+    @And("user declines all cookies")
+    public void userDeclinesAllCookies() {
+        BrowserUtilities.switchToWindow("Terms & Conditions - TransferMate Global Payments - Google Chrome");
+        cookiesPage.declineCookies.click();
+    }
 
     @And("user clicks Terms of Use and Privacy Policy checkbox")
     public void userClicksTermsOfUseAndPrivacyPolicyCheckbox() {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
-        wait.until(ExpectedConditions.elementToBeClickable(signUpPage.termsOfUse));
+        //WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+       // wait.until(ExpectedConditions.elementToBeClickable(signUpPage.termsOfUse));
         signUpPage.termsOfUse.click();
     }
 
 
+
     @And("user clicks hear about news and offers checkbox")
     public void userClicksHearAboutNewsAndOffersCheckbox() {
-     //   WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
-      //  wait.until(ExpectedConditions.elementToBeClickable(signUpPage.newsAndOffers));
         signUpPage.newsAndOffers.click();
-
     }
 
 
     @And("user enters the captcha result")
     public void userEntersTheCaptchaResult() {
-
-
-        //System.out.println("captcha.getAttribute(\"innerText\") = " + signUpPage.captchaQuestion.getAttribute("innerText"));
-
         String s = signUpPage.captchaQuestion.getAttribute("innerText");
         String[] res = s.split(" ");
         int result;
         if(res[1] == "+") {
             result = Integer.valueOf(res[0]) + Integer.valueOf(res[2]);
-            //System.out.println("result = " + result);
         } else {
             result = Integer.valueOf(res[0]) - Integer.valueOf(res[2]);
-            //System.out.println("result = " + result);
         }
-
         signUpPage.captchaResult.sendKeys(""+result);
     }
 
@@ -164,15 +176,18 @@ public class SignUp_StepDefs {
     @Then("user sees a javascript alert")
     public void userSeesAJavascriptAlert() {
         Alert alert = Driver.getDriver().switchTo().alert();
-        String expectedAlert = "Changes you made may not be saved.";
-        Assert.assertTrue(alert.getText().contains(expectedAlert));
+        /*String expectedAlert = "Changes you made may not be saved.";
+        System.out.println("expectedAlert = " + expectedAlert);
+        System.out.println("alert.getText() = " + alert.getText());
+        Assert.assertTrue(alert.getText().contains(expectedAlert));*/
         alert.accept();
+       //alert.dismiss();
 
     }
 
     @And("user clicks close button")
     public void userClicksCloseButton() {
-        Driver.getDriver().close();
+        Driver.getDriver().quit();
     }
 
     @When("user clicks on TransferMate button")
@@ -201,5 +216,7 @@ public class SignUp_StepDefs {
         String expectedTitle = "Sign up for your free TransferMate account";
         Assert.assertTrue(Driver.getDriver().getTitle().contains(expectedTitle));
     }
+
+
 
 }

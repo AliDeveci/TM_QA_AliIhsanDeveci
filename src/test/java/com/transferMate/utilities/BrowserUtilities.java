@@ -9,25 +9,47 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 public class BrowserUtilities {
 
 
-    /*
-This method will accept int (in seconds) and execute Thread.sleep
-for given duration
- */
-    public static void sleep(int second) {
-        second *= 1000;
-        try {
-            Thread.sleep(second);
-        } catch (InterruptedException e) {
 
+
+    public static void switchWindowAndVerify(String expectedInUrl, String expectedInTitle){
+
+        Set<String> allWindowsHandles = Driver.getDriver().getWindowHandles();
+
+        for (String each : allWindowsHandles) {
+
+            Driver.getDriver().switchTo().window(each);
+
+            System.out.println("Current URL: " + Driver.getDriver().getCurrentUrl());
+
+            if (Driver.getDriver().getCurrentUrl().contains(expectedInUrl)){
+                break;
+            }
         }
+
+        //5. Assert:Title contains “expectedInTitle”
+        String actualTitle = Driver.getDriver().getTitle();
+        Assert.assertTrue(actualTitle.contains(expectedInTitle));
     }
-
-
+    /**
+     * Switches to new window by the exact title. Returns to original window if target title not found
+     * @param targetTitle
+     */
+    public static void switchToWindow(String targetTitle) {
+        String origin = Driver.getDriver().getWindowHandle();
+        for (String handle : Driver.getDriver().getWindowHandles()) {
+            Driver.getDriver().switchTo().window(handle);
+            if (Driver.getDriver().getTitle().equals(targetTitle)) {
+                return;
+            }
+        }
+        Driver.getDriver().switchTo().window(origin);
+    }
     /*
     This method accepts a String "expectedTitle" and Asserts if it is true
      */
@@ -78,17 +100,6 @@ for given duration
                 each.click();
             }
         }
-    }
-
-
-    /**
-     * Moves the mouse to given element
-     *
-     * @param element on which to hover
-     */
-    public static void hover(WebElement element) {
-        Actions actions = new Actions(Driver.getDriver());
-        actions.moveToElement(element).perform();
     }
 
 

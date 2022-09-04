@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.NoSuchElementException;
 
 public class SignUpPage {
@@ -21,7 +22,7 @@ public class SignUpPage {
         if (buttonName.startsWith("I")) {
             buttonName = "individual";
         }
-        buttonName = buttonName.toLowerCase();
+        buttonName = buttonName.replace(" ","_").toLowerCase();
         WebElement radioButton = Driver.getDriver().findElement(By.xpath("(//label[@for='account_type_" + buttonName + "'])[2]"));
         return radioButton;
     }
@@ -56,10 +57,11 @@ public class SignUpPage {
     @FindBy(id = "__pin_mobile_number_mobile_phone")
     public WebElement mobilePhone;
 
-    @FindBy(xpath = "(//div/label[@for='terms_of_use_agree'])[1]")
+
+    @FindBy(id = "register_terms_of_use_agree")
     public WebElement termsOfUse;
 
-    @FindBy(id = "register_terms_of_use_agree_label_cell")
+    @FindBy(id = "register_newsletter_and_privacy_policy_agree")
     public WebElement newsAndOffers;
 
     @FindBy(id="cal_captcha_f10_question")
