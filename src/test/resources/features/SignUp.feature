@@ -5,7 +5,7 @@ Feature: TransferMate Sign up functionality
   Background: For the scenarios in the feature file, user is expected to be on Sign up page
     Given user is on the TransferMate Sign up page
 
-  @positive @wip
+  @positive #@wip
   Scenario: Sign up functionality with valid credentials in Education account verification
     When user clicks "Education" radio button
     And user selects Ireland on Country registration
@@ -15,17 +15,13 @@ Feature: TransferMate Sign up functionality
     And user selects Ireland on Mobile Phone registration
     And user clicks Mobile Phone and enters "12345678"
     And user clicks Terms of Use and Privacy Policy checkbox
-
-   #And user declines all cookies
-    #And user clicks Terms of Use and Privacy Policy checkbox
     And user clicks hear about news and offers checkbox
-
     And user enters the captcha result
-    #And user clicks open my free account submit button
-    #Then user lands on email and mobile number verification page
+    And user clicks open my free account submit button
+    Then user lands on email and mobile number verification page
 
 
-  @positive
+  @positive #@wip
   Scenario Outline: Sign up functionality with valid credentials in Individual account verification
     When user clicks "Individual" radio button
     And user selects Ireland on Nationality registration
@@ -36,14 +32,14 @@ Feature: TransferMate Sign up functionality
     And user clicks Mobile Phone and enters "12345678"
     And user clicks Terms of Use and Privacy Policy checkbox
     And user enters the captcha result
-    #And user clicks open my free account submit button
-    #Then user lands on email and mobile number verification page
+    And user clicks open my free account submit button
+    Then user lands on email and mobile number verification page
 
     Examples: Sign up credentials we are going to use in this scenario
       | firstname | lastname | email               |
-      | Alex      | Green    | alexgreen@happy.com |
+      | Alex      | Green    | a@happy.com |
 
-  @positive
+  @positive @wip
   Scenario Outline: Sign up functionality with valid credentials in Corporate account verification
     When user clicks "Corporate" radio button
     And user selects Ireland on Country of incorporation registration
@@ -55,14 +51,14 @@ Feature: TransferMate Sign up functionality
     And user clicks Terms of Use and Privacy Policy checkbox
     And user clicks hear about news and offers checkbox
     And user enters the captcha result
-    #And user clicks open my free account submit button
-    #Then user lands on email and mobile number verification page
+    And user clicks open my free account submit button
+    Then user lands on email and mobile number verification page
 
     Examples: Sign up credentials we are going to use in this scenario
       | firstname | lastname | email                |
-      | Alex      | Yellow   | alexyellow@happy.com |
+      | Alex      | Yellow   | al@happy.com |
 
-  @positive
+  @positive #@wip
   Scenario Outline: Sign up functionality with valid credentials in Partnership account verification
     When user clicks "Partnership" radio button
     And user selects Ireland on Country of incorporation registration
@@ -73,14 +69,14 @@ Feature: TransferMate Sign up functionality
     And user clicks Mobile Phone and enters "12345678"
     And user clicks Terms of Use and Privacy Policy checkbox
     And user enters the captcha result
-    #And user clicks open my free account submit button
-    #Then user lands on email and mobile number verification page
+    And user clicks open my free account submit button
+    Then user lands on email and mobile number verification page
 
     Examples: Sign up credentials we are going to use in this scenario
       | firstname | lastname | email               |
       | Alex      | Black    | alexblack@happy.com |
 
-  @positive
+  @positive #@wip
   Scenario Outline: Sign up functionality with valid credentials in Sole Trader account verification
     When user clicks "Sole Trader" radio button
     And user selects Ireland on Country of incorporation registration
@@ -92,14 +88,14 @@ Feature: TransferMate Sign up functionality
     And user clicks Terms of Use and Privacy Policy checkbox
     And user clicks hear about news and offers checkbox
     And user enters the captcha result
-    #And user clicks open my free account submit button
-    #Then user lands on email and mobile number verification page
+    And user clicks open my free account submit button
+    Then user lands on email and mobile number verification page
 
     Examples: Sign up credentials we are going to use in this scenario
       | firstname | lastname | email               |
       | Alex      | White    | alexwhite@happy.com |
 
-  @negative
+  @negative #@wip
   Scenario Outline: Sign up functionality with invalid credential in Education account verification
     When user clicks "Education" radio button
     And user selects Ireland on Country registration
@@ -111,14 +107,14 @@ Feature: TransferMate Sign up functionality
     And user clicks Terms of Use and Privacy Policy checkbox
     And user clicks hear about news and offers checkbox
     And user enters the captcha result
-    #And user clicks open my free account submit button
-    #Then user sees please enter correct information message on incorrect blank
+    And user clicks open my free account submit button
+    Then user sees please enter correct information message on incorrect blank
 
     Examples: Sign up credentials we are going to use in this scenario
       | firstname | lastname | email               |
       | $23yyy!qw | Lastname | firstlast@happy.com |
 
-  @negative
+  @negative #@wip
   Scenario Outline: Sign up functionality with invalid credential in Individual account verification
     When user clicks "Individual" radio button
     And user selects Ireland on Nationality registration
@@ -130,14 +126,14 @@ Feature: TransferMate Sign up functionality
     And user clicks Terms of Use and Privacy Policy checkbox
     And user clicks hear about news and offers checkbox
     And user enters the captcha result
-    #And user clicks open my free account submit button
-    #Then user sees please enter correct information message on incorrect blank
+    And user clicks open my free account submit button
+    Then user sees please enter correct information message on incorrect blank
 
     Examples: Sign up credentials we are going to use in this scenario
       | firstname | lastname  | email               |
       | Alex      | $23yyy!qw | alexgreen@happy.com |
 
-  @negative
+  @negative #@wip
   Scenario Outline: Sign up functionality with invalid credential in Corporate account verification
     When user clicks "Corporate" radio button
     And user selects Ireland on Country of incorporation registration
@@ -149,14 +145,14 @@ Feature: TransferMate Sign up functionality
     And user clicks Terms of Use and Privacy Policy checkbox
     And user clicks hear about news and offers checkbox
     And user enters the captcha result
-    #And user clicks open my free account submit button
-    #Then user sees please enter correct information message on incorrect blank
+    And user clicks open my free account submit button
+    Then user sees please enter correct information message on incorrect blank
 
     Examples: Sign up credentials we are going to use in this scenario
       | firstname | lastname | email          |
       | Alex      | Yellow   | Idon'tUseEmail |
 
-  @negative
+  @negative #@wip
   Scenario Outline: Sign up functionality with invalid credential in Partnership account verification
     When user clicks "Partnership" radio button
     And user selects Ireland on Country of incorporation registration
@@ -168,14 +164,14 @@ Feature: TransferMate Sign up functionality
     And user clicks Terms of Use and Privacy Policy checkbox
     And user clicks hear about news and offers checkbox
     And user enters the captcha result
-   # And user clicks open my free account submit button
-    #Then user sees please enter correct information message on incorrect blank
+    And user clicks open my free account submit button
+    Then user sees please enter correct information message on incorrect blank
 
     Examples: Sign up credentials we are going to use in this scenario
       | firstname | lastname | email               |
       | Alex      | Black    | alexblack@happy.com |
 
-  @negative
+  @negative #@wip
   Scenario Outline: Sign up functionality with invalid credential in Sole Trader account verification
     When user clicks "Sole Trader" radio button
     And user selects Ireland on Country of incorporation registration
@@ -186,14 +182,14 @@ Feature: TransferMate Sign up functionality
     And user clicks Mobile Phone and enters "12345678"
     And user clicks hear about news and offers checkbox
     And user enters the captcha result
-  #  And user clicks open my free account submit button
-   # Then user sees red lined check box and can not move forward
+    And user clicks open my free account submit button
+    Then user can not move forward
 
     Examples: Sign up credentials we are going to use in this scenario
       | firstname | lastname | email               |
       | Alex      | White    | alexwhite@happy.com |
 
-  @negative
+  @negative #@wip
   Scenario Outline: After some Sign up credentials are entered when user clicks refresh button, user sees warning
   message verification
     When user clicks "Sole Trader" radio button
@@ -208,7 +204,7 @@ Feature: TransferMate Sign up functionality
       | firstname | lastname | email               |
       | Alex      | White    | alexwhite@happy.com |
 
-  @negative
+  @negative #@wip
   Scenario Outline: After some Sign up credentials are entered when user clicks close button, user sees warning
   message verification
     When user clicks "Education" radio button
@@ -224,7 +220,7 @@ Feature: TransferMate Sign up functionality
       | firstname | lastname | email               |
       | Alex      | White    | alexwhite@happy.com |
 
-  @positive
+  @positive #@wip
   Scenario: When user clicks on "TransferMate Global Payments" user lands on home page, then when clicks on
   "Sign up" user lands on Sign up page verification
     When user clicks on TransferMate button

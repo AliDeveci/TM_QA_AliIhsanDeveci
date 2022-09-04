@@ -58,10 +58,10 @@ public class SignUpPage {
     public WebElement mobilePhone;
 
 
-    @FindBy(id = "register_terms_of_use_agree")
+    @FindBy(xpath = "(//div/label[@for='terms_of_use_agree'])[2]")
     public WebElement termsOfUse;
 
-    @FindBy(id = "register_newsletter_and_privacy_policy_agree")
+    @FindBy(xpath = "(//div/label[@for='newsletter_and_privacy_policy_agree'])[2]")
     public WebElement newsAndOffers;
 
     @FindBy(id="cal_captcha_f10_question")
@@ -70,7 +70,7 @@ public class SignUpPage {
     @FindBy(xpath = "//div/input[@name='__calc_captcha_text']")
     public WebElement captchaResult;
 
-    @FindBy(name = "button_subscribe")
+    @FindBy(xpath = "//div/input[@formnovalidate='formnovalidate']")
     public WebElement openMyFreeAccount;
 
     @FindBy (className = "logo")
