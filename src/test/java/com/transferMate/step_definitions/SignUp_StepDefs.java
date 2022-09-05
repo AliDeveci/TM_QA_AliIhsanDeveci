@@ -10,6 +10,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -111,9 +113,8 @@ public class SignUp_StepDefs {
 
     @And("user clicks open my free account submit button")
     public void userClicksOpenMyFreeAccountSubmitButton() {
-        // WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
-        //wait.until(ExpectedConditions.elementToBeClickable(signUpPage.openMyFreeAccount));
-        BrowserUtilities.sleep(5);
+
+
         signUpPage.openMyFreeAccount.click();
     }
 
@@ -221,6 +222,9 @@ public class SignUp_StepDefs {
     @And("user clicks Mobile Phone and enters incorrect value as {string}")
     public void userClicksMobilePhoneAndEntersIncorrectInput(String phone) {
         signUpPage.mobilePhone.sendKeys(phone);
+        JavascriptExecutor jse = (JavascriptExecutor)Driver.getDriver();
+        jse.executeScript("scroll(0, 1000);");
+        BrowserUtilities.sleep(2);
     }
 
 

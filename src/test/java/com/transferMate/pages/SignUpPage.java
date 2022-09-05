@@ -69,7 +69,7 @@ public class SignUpPage {
     @FindBy(xpath = "//div/input[@name='__calc_captcha_text']")
     public WebElement captchaResult;
 
-    @FindBy(xpath = "//div/input[@formnovalidate='formnovalidate']")
+    @FindBy(id = "button_subscribe")
     public WebElement openMyFreeAccount;
 
     @FindBy (className = "logo")
