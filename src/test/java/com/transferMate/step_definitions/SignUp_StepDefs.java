@@ -69,6 +69,9 @@ public class SignUp_StepDefs {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
         wait.until(ExpectedConditions.elementToBeClickable(signUpPage.mobilePhone));
         signUpPage.mobilePhone.sendKeys("12345678");
+        JavascriptExecutor jse = (JavascriptExecutor)Driver.getDriver();
+        jse.executeScript("scroll(0, 1000);");
+        BrowserUtilities.sleep(2);
     }
 
 
@@ -113,8 +116,6 @@ public class SignUp_StepDefs {
 
     @And("user clicks open my free account submit button")
     public void userClicksOpenMyFreeAccountSubmitButton() {
-
-
         signUpPage.openMyFreeAccount.click();
     }
 

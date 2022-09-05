@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com/transferMate/step_definitions",
         dryRun = false,
-        tags = "@run"
+        tags = "@signUp"
 
 )
 
