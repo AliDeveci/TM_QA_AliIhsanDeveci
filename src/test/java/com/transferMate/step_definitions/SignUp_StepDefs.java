@@ -1,6 +1,7 @@
 package com.transferMate.step_definitions;
 
 import com.transferMate.pages.SignUpPage;
+import com.transferMate.utilities.BrowserUtilities;
 import com.transferMate.utilities.ConfigurationReader;
 import com.transferMate.utilities.Driver;
 import io.cucumber.java.en.And;
@@ -10,7 +11,6 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -48,9 +48,9 @@ public class SignUp_StepDefs {
     }
 
 
-    @And("user clicks Email address and enters {string}")
+    @And("user clicks Email address and enters email {string}")
     public void userClicksEmailAddressAndEnters(String arg0) {
-        signUpPage.email.sendKeys("j@happy.com", Keys.TAB);
+        signUpPage.email.sendKeys(BrowserUtilities.emailCreation());
     }
 
 
@@ -73,12 +73,11 @@ public class SignUp_StepDefs {
 
 
     @And("user clicks Terms of Use and Privacy Policy checkbox")
-    public void userClicksTermsOfUseAndPrivacyPolicyCheckbox()  {
+    public void userClicksTermsOfUseAndPrivacyPolicyCheckbox() {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
         wait.until(ExpectedConditions.elementToBeClickable(signUpPage.termsOfUse));
         signUpPage.termsOfUse.click();
     }
-
 
 
     @And("user clicks hear about news and offers checkbox")
@@ -90,23 +89,28 @@ public class SignUp_StepDefs {
 
 
     @And("user enters the captcha result")
-    public void userEntersTheCaptchaResult() {
+    public void userEntersTheCaptchaResult() throws InterruptedException {
         String s = signUpPage.captchaQuestion.getAttribute("innerText");
         String[] res = s.split(" ");
         int result;
-        if(res[1] == "+") {
+        if (res[1].equals("+")) {
             result = Integer.valueOf(res[0]) + Integer.valueOf(res[2]);
-        } else {
+        } else if (res[1].equals("-")) {
             result = Integer.valueOf(res[0]) - Integer.valueOf(res[2]);
+        } else {
+            throw new RuntimeException("The operations are neither + nor -");
         }
 
-        signUpPage.captchaResult.sendKeys(""+result);
+        signUpPage.captchaResult.sendKeys("" + result);
+
+        //Thread.sleep(5000);
+
     }
 
 
     @And("user clicks open my free account submit button")
     public void userClicksOpenMyFreeAccountSubmitButton() throws InterruptedException {
-       // WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+        // WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
         //wait.until(ExpectedConditions.elementToBeClickable(signUpPage.openMyFreeAccount));
         Thread.sleep(5000);
         signUpPage.openMyFreeAccount.click();
@@ -135,12 +139,24 @@ public class SignUp_StepDefs {
     @Then("user sees please enter correct information message on incorrect blank")
     public void userSeesPleaseEnterCorrectInformationMessageOnIncorrectBlank() {
 
+        String expectedValueOfAriaInvalidFirstName = "true";
+        String expectedValueOfAriaInvalidlastName = "true";
+        String expectedValueOfAriaInvalidEmail = "true";
+        String expectedValueOfAriaInvalidMobilePhone = "true";
+
+
+        Assert.assertTrue(signUpPage.firstName.getAttribute("aria-invalid").equals(expectedValueOfAriaInvalidFirstName));
+        Assert.assertTrue(signUpPage.lastName.getAttribute("aria-invalid").equals(expectedValueOfAriaInvalidlastName));
+        Assert.assertTrue(signUpPage.email.getAttribute("aria-invalid").equals(expectedValueOfAriaInvalidEmail));
+        Assert.assertTrue(signUpPage.mobilePhone.getAttribute("aria-invalid").equals(expectedValueOfAriaInvalidMobilePhone));
+
+
     }
 
 
     @Then("user can not move forward")
     public void userCanNotMoveForward() {
-        Assert.assertEquals("Sign up for your free TransferMate account",Driver.getDriver().getTitle());
+        Assert.assertEquals("Sign up for your free TransferMate account", Driver.getDriver().getTitle());
     }
 
     @And("user clicks refresh button")
@@ -153,7 +169,7 @@ public class SignUp_StepDefs {
     public void userSeesAJavascriptAlert() {
         Alert alert = Driver.getDriver().switchTo().alert();
         alert.accept();
-       //alert.dismiss();
+        //alert.dismiss();
 
     }
 
@@ -190,4 +206,23 @@ public class SignUp_StepDefs {
     }
 
 
+    @And("user clicks First Name and enters incorrect value as {string}")
+    public void userClicksFirstNameAndEntersIncorrectInput(String firstName) {
+        signUpPage.firstName.sendKeys(firstName);
+    }
+
+    @And("user clicks Last Name and enters incorrect value as {string}")
+    public void userClicksLastNameAndEntersIncorrectInput(String lastName) {
+        signUpPage.lastName.sendKeys(lastName);
+    }
+
+    @And("user clicks Email address and enters incorrect value as {string}")
+    public void userClicksEmailAddressAndEntersIncorrectInput(String email) {
+        signUpPage.email.sendKeys(email);
+    }
+
+    @And("user clicks Mobile Phone and enters incorrect value as {string}")
+    public void userClicksMobilePhoneAndEntersIncorrectInput(String phone) {
+        signUpPage.mobilePhone.sendKeys(phone);
+    }
 }

@@ -1,6 +1,7 @@
 package com.transferMate.utilities;
 
 
+import com.github.javafaker.Faker;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -36,6 +37,7 @@ public class BrowserUtilities {
         String actualTitle = Driver.getDriver().getTitle();
         Assert.assertTrue(actualTitle.contains(expectedInTitle));
     }
+
     /**
      * Switches to new window by the exact title. Returns to original window if target title not found
      * @param targetTitle
@@ -129,6 +131,15 @@ public class BrowserUtilities {
                 element.click();
             }
         }
+    }
+
+    public static String emailCreation(){
+
+        Faker faker = new Faker();
+        String email = faker.letterify("????????") + "@happy.com";
+
+        return email;
+
     }
 
 }
