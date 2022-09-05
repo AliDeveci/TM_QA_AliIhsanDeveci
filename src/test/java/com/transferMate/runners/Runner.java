@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         plugin = {
-                //"pretty",
+                "pretty",
                 "json:target/cucumber.json",
                 "html:target/cucumber-report.html",
                 "rerun:target/rerun.txt",
@@ -16,8 +16,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "com/transferMate/step_definitions",
         dryRun = false,
-        tags = "@wip",
-        publish = false
+        tags = "@signUp"
 
 )
 

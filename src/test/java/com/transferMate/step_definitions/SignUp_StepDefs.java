@@ -9,7 +9,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -59,7 +58,6 @@ public class SignUp_StepDefs {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
         wait.until(ExpectedConditions.elementToBeClickable(signUpPage.phoneDrop));
         Select phone = new Select(signUpPage.phoneDrop);
-        signUpPage.phoneDrop.click();
         phone.selectByValue("ie 353");
     }
 
@@ -68,7 +66,7 @@ public class SignUp_StepDefs {
     public void userClicksMobilePhoneAndEnters(String arg0) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
         wait.until(ExpectedConditions.elementToBeClickable(signUpPage.mobilePhone));
-        signUpPage.mobilePhone.sendKeys("12345678", Keys.TAB);
+        signUpPage.mobilePhone.sendKeys("12345678");
     }
 
 
@@ -89,7 +87,9 @@ public class SignUp_StepDefs {
 
 
     @And("user enters the captcha result")
-    public void userEntersTheCaptchaResult() throws InterruptedException {
+    public void userEntersTheCaptchaResult() {
+
+        /**   THIS CODE WAS WRITTEN TO HANDLE CAPTCHA, BUT SOMETIMES FAILS. SO SLEEP IS USED TO HANDLE CAPTCHA MANUALLY.
         String s = signUpPage.captchaQuestion.getAttribute("innerText");
         String[] res = s.split(" ");
         int result;
@@ -102,17 +102,18 @@ public class SignUp_StepDefs {
         }
 
         signUpPage.captchaResult.sendKeys("" + result);
+        */
 
-        //Thread.sleep(5000);
+        BrowserUtilities.sleep(5);
 
     }
 
 
     @And("user clicks open my free account submit button")
-    public void userClicksOpenMyFreeAccountSubmitButton() throws InterruptedException {
+    public void userClicksOpenMyFreeAccountSubmitButton() {
         // WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
         //wait.until(ExpectedConditions.elementToBeClickable(signUpPage.openMyFreeAccount));
-        Thread.sleep(5000);
+        BrowserUtilities.sleep(5);
         signUpPage.openMyFreeAccount.click();
     }
 
@@ -162,7 +163,7 @@ public class SignUp_StepDefs {
     @And("user clicks refresh button")
     public void userClicksRefreshButton() {
         Driver.getDriver().navigate().refresh();
-
+        BrowserUtilities.sleep(2); //TO SHOW THE JAVASCRIPT ALERT
     }
 
     @Then("user sees a javascript alert")
@@ -170,12 +171,8 @@ public class SignUp_StepDefs {
         Alert alert = Driver.getDriver().switchTo().alert();
         alert.accept();
         //alert.dismiss();
+        BrowserUtilities.sleep(2); // TO SHOW THE REFRESHED PAGE
 
-    }
-
-    @And("user clicks close button")
-    public void userClicksCloseButton() {
-        Driver.getDriver().quit();
     }
 
     @When("user clicks on TransferMate button")
@@ -225,4 +222,6 @@ public class SignUp_StepDefs {
     public void userClicksMobilePhoneAndEntersIncorrectInput(String phone) {
         signUpPage.mobilePhone.sendKeys(phone);
     }
+
+
 }

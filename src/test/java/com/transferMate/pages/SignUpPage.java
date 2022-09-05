@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.NoSuchElementException;
 
 public class SignUpPage {
@@ -79,8 +78,7 @@ public class SignUpPage {
     @FindBy(id = "menu_485_115_28617")
     public WebElement signUpButton;
 
-    @FindBy (id= "register_terms_of_use_agree_error")
-    public WebElement termsOfUseError;
+
 
 
 

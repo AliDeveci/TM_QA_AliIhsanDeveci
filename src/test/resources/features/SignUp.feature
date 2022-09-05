@@ -5,7 +5,7 @@ Feature: TransferMate Sign up functionality
   Background: For the scenarios in the feature file, user is expected to be on Sign up page
     Given user is on the TransferMate Sign up page
 
-  @positive @wip
+  @positive @wip @run
   Scenario: Sign up functionality with valid credentials in Education account verification
     When user clicks "Education" radio button
     And user selects Ireland on Country registration
@@ -95,7 +95,7 @@ Feature: TransferMate Sign up functionality
       | firstname | lastname |
       | Alex      | White    |
 
-  @negative #done
+  @negative @wip
   Scenario Outline: Sign up functionality with invalid credential in all account verifications
     When user clicks "<accountType>" radio button
     And user selects Ireland on Country of incorporation registration
@@ -117,8 +117,8 @@ Feature: TransferMate Sign up functionality
       | Partnership |
       | Sole Trader |
 
-  @negative #done
-  Scenario Outline: Sign up functionality with invalid credential in Sole Trader account verification
+  @negative @wip
+  Scenario Outline: Sign up functionality without clicking Terms of Use and Privacy Policy checkbox
     When user clicks "Sole Trader" radio button
     And user selects Ireland on Country of incorporation registration
     And user clicks First Name and enters "<firstname>"
@@ -135,7 +135,7 @@ Feature: TransferMate Sign up functionality
       | firstname | lastname |
       | Alex      | White    |
 
-  @negative #done
+  @negative @wip
   Scenario Outline: After some Sign up credentials are entered when user clicks refresh button, user sees warning
   message verification
     When user clicks "Sole Trader" radio button
@@ -150,23 +150,7 @@ Feature: TransferMate Sign up functionality
       | firstname | lastname |
       | Alex      | White    |
 
-  @negative #done
-  Scenario Outline: After some Sign up credentials are entered when user clicks close button, user sees warning
-  message verification
-    When user clicks "Education" radio button
-    And user selects Ireland on Country of incorporation registration
-    And user clicks First Name and enters "<firstname>"
-    And user clicks Last Name and enters "<lastname>"
-    And user clicks Email address and enters email "email"
-
-    And user clicks close button
-    Then user sees a javascript alert
-
-    Examples: Sign up credentials we are going to use in this scenario
-      | firstname | lastname |
-      | Alex      | White    |
-
-  @positive #done
+  @positive @wip
   Scenario: When user clicks on "TransferMate Global Payments" user lands on home page, then when clicks on
   "Sign up" user lands on Sign up page verification
     When user clicks on TransferMate button
